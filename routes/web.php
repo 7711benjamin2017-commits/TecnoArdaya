@@ -219,7 +219,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
         // Generar QR
         Route::post('/pagos/{pago}/generar-qr', [QrController::class, 'generarQR'])->name('api.generar-qr');
-        //Route::post('/pagos/callback', [QrController::class, 'handleCallback'])->name('api.pagos.callback');
+        Route::post('/pagos/callback', [QrController::class, 'handleCallback'])->name('api.pagos.callback');
         // Reportes
         Route::get('/reportes', [AdminReportController::class, 'index'])->name('reportes.index');
         Route::post('/reportes/exportar', [AdminReportController::class, 'exportar'])->name('reportes.exportar');
