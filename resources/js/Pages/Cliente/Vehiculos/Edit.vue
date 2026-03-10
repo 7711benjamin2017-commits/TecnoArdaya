@@ -72,19 +72,28 @@ const fotoActual = computed(() => {
 });
 
 const submit = () => {
-    // Si no hay nueva foto, no enviar el campo foto para evitar validación
-    if (!nuevaFoto.value) {
-        const { foto, ...formWithoutPhoto } = form;
-        formWithoutPhoto.put(route('cliente.vehiculos.update', props.vehiculo.id));
-    } else {
-        form.put(route('cliente.vehiculos.update', props.vehiculo.id), {
+    // PHP solo procesa archivos en multipart/form-data con POST.
+    // Usamos method spoofing para ejecutar la ruta update (PUT/PATCH).
+    form
+        .transform((data) => {
+            const payload = {
+                ...data,
+                _method: 'put'
+            };
+
+            if (!nuevaFoto.value) {
+                delete payload.foto;
+            }
+
+            return payload;
+        })
+        .post(route('cliente.vehiculos.update', props.vehiculo.id), {
             forceFormData: true,
             onSuccess: () => {
                 fotoPreview.value = null;
                 nuevaFoto.value = null;
             }
         });
-    }
 };
 
 const marcasVehiculos = [

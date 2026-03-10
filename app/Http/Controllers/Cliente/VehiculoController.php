@@ -76,7 +76,6 @@ class VehiculoController extends Controller
 
     public function show(Vehiculo $vehiculo)
     {
-
         $vehiculo->load([
             'citas' => function ($query) {
                 $query->latest()->limit(5);
@@ -85,6 +84,8 @@ class VehiculoController extends Controller
             'citas.diagnostico.ordenTrabajo'
         ]);
 
+        //dd($vehiculo);
+        $vehiculo->foto = $vehiculo->foto ? asset('storage/' . $vehiculo->foto) : null;
         $estadisticas = [
             'total_citas' => $vehiculo->citas()->count(),
             'citas_completadas' => $vehiculo->citas()->where('estado', 'completada')->count(),
@@ -105,7 +106,7 @@ class VehiculoController extends Controller
     {
         // Asegurarse de cargar todos los datos necesarios
         $vehiculo->load(['citas']);
-
+        $vehiculo->foto = $vehiculo->foto ? asset('storage/' . $vehiculo->foto) : null;
         return Inertia::render('Cliente.Vehiculos.Edit', [
             'vehiculo' => $vehiculo
         ]);
@@ -117,7 +118,7 @@ class VehiculoController extends Controller
             'placa' => 'required|string|max:20|unique:vehiculos,placa,' . $vehiculo->id,
             'marca' => 'required|string|max:50',
             'modelo' => 'required|string|max:50',
-            'anio' => 'required|integer|min:1900|max:' . (date('Y') + 1),
+            'anio' => 'required|integer|min:1900',
             'color' => 'required|string|max:30',
             'kilometraje' => 'nullable|integer|min:0',
             'foto' => 'nullable|image|max:2048',

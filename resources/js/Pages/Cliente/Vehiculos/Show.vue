@@ -91,7 +91,7 @@ const getEstadoColor = (estado) => {
                             <div class="h-64 sm:h-80 bg-gray-100 relative group">
                                 <img
                                     v-if="vehiculo.foto"
-                                    :src="`/storage/${vehiculo.foto}`"
+                                    :src="`${vehiculo.foto}`"
                                     :alt="`${vehiculo.marca} ${vehiculo.modelo}`"
                                     class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                                 />
