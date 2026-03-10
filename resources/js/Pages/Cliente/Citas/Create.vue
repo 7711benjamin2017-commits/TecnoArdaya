@@ -53,6 +53,33 @@ const formularioValido = computed(() => {
     return form.vehiculo_id && form.fecha && form.hora && form.motivo;
 });
 
+const parseFechaLocal = (fechaIso) => {
+    if (!fechaIso) return null;
+    const [anio, mes, dia] = fechaIso.split('-').map(Number);
+
+    // Forzar hora media para evitar desfaces por zona horaria/UTC.
+    return new Date(anio, mes - 1, dia, 12, 0, 0);
+};
+
+const formatearFechaLarga = (fechaIso) => {
+    const fecha = parseFechaLocal(fechaIso);
+    if (!fecha) return '';
+
+    return fecha.toLocaleDateString('es-ES', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+};
+
+const formatearFechaCorta = (fechaIso) => {
+    const fecha = parseFechaLocal(fechaIso);
+    if (!fecha) return '';
+
+    return fecha.toLocaleDateString('es-ES');
+};
+
 const getEstadoBackgroundColor = (estado) => {
     const colores = {
         pendiente: 'var(--color-warning)',
@@ -74,6 +101,8 @@ const getEstadoRingColor = (estado) => {
     };
     return colores[estado] || 'var(--color-neutral)';
 };
+
+console.log('Fechas disponibles:', props.fechasDisponibles);
 </script>
 
 <template>
@@ -213,12 +242,7 @@ const getEstadoRingColor = (estado) => {
                                         :key="fecha"
                                         :value="fecha"
                                     >
-                                        {{ new Date(fecha).toLocaleDateString('es-ES', {
-                                            weekday: 'long',
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
-                                        }) }}
+                                        {{ formatearFechaLarga(fecha) }}
                                     </option>
                                 </select>
                                 <p v-if="form.errors.fecha" class="text-sm mt-1"
@@ -347,7 +371,7 @@ const getEstadoRingColor = (estado) => {
                                     <p :style="{ color: 'var(--color-text)' }">Fecha y Hora:</p>
                                     <p class="font-semibold"
                                         :style="{ color: 'var(--color-text)' }">
-                                        {{ new Date(form.fecha).toLocaleDateString('es-ES') }} a las {{ form.hora }}
+                                        {{ formatearFechaCorta(form.fecha) }} a las {{ form.hora }}
                                     </p>
                                 </div>
                                 <div class="md:col-span-2">

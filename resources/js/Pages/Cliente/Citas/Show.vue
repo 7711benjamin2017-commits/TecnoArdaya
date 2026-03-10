@@ -232,14 +232,14 @@ const getEstadoIcon = (estado) => {
                             </h3>
 
                             <div class="space-y-3">
-                                <Link
+                               <!--  <Link
                                     v-if="datosAdicionales.puede_reagendar"
                                     :href="route('cliente.citas.edit', cita.id)"
                                     class="block w-full text-center px-4 py-2 bg-taller-blue-dark text-white rounded-lg hover:bg-taller-blue-light transition-colors"
                                 >
                                     Reagendar Cita
                                 </Link>
-
+ -->
                                 <Link
                                     v-if="datosAdicionales.puede_cancelar"
                                     :href="route('cliente.citas.destroy', cita.id)"
@@ -271,8 +271,8 @@ const getEstadoIcon = (estado) => {
                                     Si necesitas modificar tu cita o tienes alguna pregunta, contáctanos:
                                 </p>
                                 <div class="mt-3 space-y-1">
-                                    <p class="font-medium">📞 Teléfono: +591 XXX XXX XXX</p>
-                                    <p class="font-medium">✉️ Email: taller@example.com</p>
+                                    <p class="font-medium">📞 Teléfono: +591 73119607</p>
+                                    <p class="font-medium">✉️ Email: taller-ardaya@gmail.com</p>
                                     <p class="font-medium">🕒 Horario: Lunes a Viernes 8:00 - 18:00</p>
                                 </div>
                             </div>

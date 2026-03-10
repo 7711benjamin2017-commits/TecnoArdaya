@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Cliente;
 use App\Http\Controllers\Controller;
 use App\Models\Cita;
 use App\Models\Vehiculo;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
@@ -218,14 +219,14 @@ class CitaController extends Controller
         return back()->with('success', 'Cita cancelada exitosamente.');
     }
 
+
     private function getFechasDisponibles()
     {
         $fechas = [];
-        $inicio = now()->addDay(); // Comenzar desde mañana
-        $fin = now()->addDays(30); // Hasta 30 días en el futuro
 
-        for ($fecha = $inicio; $fecha->lte($fin); $fecha->addDay()) {
-            // Excluir fines de semana
+        $period = CarbonPeriod::create(now()->addDay(), now()->addDays(30));
+
+        foreach ($period as $fecha) {
             if (!$fecha->isWeekend()) {
                 $fechas[] = $fecha->format('Y-m-d');
             }
