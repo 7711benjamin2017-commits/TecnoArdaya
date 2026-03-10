@@ -418,7 +418,7 @@ const getProgresoColor = (progreso) => {
                                         <div class="flex items-center justify-between md:justify-start gap-4 mb-3">
                                             <span class="font-mono text-xs font-bold px-2 py-1 rounded"
                                                 :style="{ 
-                                                    color: 'var(--color-text-light)',
+                                                    color: 'var(--color-text)',
                                                     backgroundColor: 'var(--color-neutral)',
                                                     borderColor: 'var(--color-border)',
                                                     borderWidth: '1px'
@@ -464,7 +464,7 @@ const getProgresoColor = (progreso) => {
                                                     {{ orden.diagnostico?.cita?.vehiculo?.marca }} {{ orden.diagnostico?.cita?.vehiculo?.modelo }}
                                                 </h3>
                                                 <p class="text-sm mb-2 font-mono"
-                                                    :style="{ color: 'var(--color-text-light)' }"
+                                                    :style="{ color: 'var(--color-text)' }"
                                                 >
                                                     {{ orden.diagnostico?.cita?.vehiculo?.placa }}
                                                 </p>
@@ -472,34 +472,40 @@ const getProgresoColor = (progreso) => {
                                                 <div class="flex flex-wrap items-center gap-4 text-sm">
                                                     <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg"
                                                         :style="{ 
-                                                            backgroundColor: 'var(--color-neutral)',
-                                                            color: 'var(--color-text-light)'
+                                                            backgroundColor: 'var(--color-base)',
+                                                            borderColor: 'var(--color-border)',
+                                                            borderWidth: '1px',
+                                                            color: 'var(--color-text)'
                                                         }"
                                                     >
                                                         <UserIcon class="h-4 w-4"
-                                                            :style="{ color: 'var(--color-text-light)' }"
+                                                            :style="{ color: 'var(--color-text)' }"
                                                         />
                                                         <span>{{ orden.mecanico?.nombre }}</span>
                                                     </div>
                                                     <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg"
                                                         :style="{ 
-                                                            backgroundColor: 'var(--color-neutral)',
-                                                            color: 'var(--color-text-light)'
+                                                            backgroundColor: 'var(--color-base)',
+                                                            borderColor: 'var(--color-border)',
+                                                            borderWidth: '1px',
+                                                            color: 'var(--color-text)'
                                                         }"
                                                     >
                                                         <CalendarIcon class="h-4 w-4"
-                                                            :style="{ color: 'var(--color-text-light)' }"
+                                                            :style="{ color: 'var(--color-text)' }"
                                                         />
                                                         <span>{{ formatDate(orden.fecha_creacion) }}</span>
                                                     </div>
                                                     <div class="flex items-center gap-2 px-3 py-1.5 rounded-lg"
                                                         :style="{ 
-                                                            backgroundColor: 'var(--color-neutral)',
+                                                            backgroundColor: 'var(--color-base)',
+                                                            borderColor: 'var(--color-border)',
+                                                            borderWidth: '1px',
                                                             color: 'var(--color-text)'
                                                         }"
                                                     >
                                                         <CurrencyDollarIcon class="h-4 w-4"
-                                                            :style="{ color: 'var(--color-text-light)' }"
+                                                            :style="{ color: 'var(--color-text)' }"
                                                         />
                                                         <span class="font-semibold">${{ formatCurrency(orden.total) }}</span>
                                                     </div>

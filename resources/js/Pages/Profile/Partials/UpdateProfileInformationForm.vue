@@ -20,9 +20,8 @@ const form = useForm({
 });
 
 const submit = () => {
-    form.put(route('profile.update'), {
+    form.patch(route('profile.update'), {
         preserveScroll: true,
-        onSuccess: () => form.reset(),
     });
 };
 </script>
