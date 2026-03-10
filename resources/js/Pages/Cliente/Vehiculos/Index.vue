@@ -245,7 +245,7 @@ const deleteVehiculo = (id) => {
                         >
                             <img
                                 v-if="vehiculo.foto"
-                                :src="`/storage/${vehiculo.foto}`"
+                                :src="`${vehiculo.foto}`"
                                 :alt="`${vehiculo.marca} ${vehiculo.modelo}`"
                                 class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                             />

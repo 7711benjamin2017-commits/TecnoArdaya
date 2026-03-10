@@ -23,6 +23,9 @@ class VehiculoController extends Controller
             ->latest()
             ->get();
 
+        foreach ($vehiculos as $vehiculo) {
+            $vehiculo->foto = $vehiculo->foto ? asset('storage/' . $vehiculo->foto) : null;
+        }     
         return Inertia::render('Cliente.Vehiculos.Index', [
             'vehiculos' => $vehiculos,
             'estadisticas' => [
